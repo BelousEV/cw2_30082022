@@ -36,11 +36,13 @@ public class ExaminerServiceTest {
     public void getQuestionNegativeTest() {
         when(javaQuestionService.getAll()).thenReturn(Collections.emptyList());
 
-      Assertions.assertThatExceptionOfType(IncorrectAmountOfQuestionsException.class)
+      assertThatExceptionOfType(IncorrectAmountOfQuestionsException.class)
             .isThrownBy(() -> examinerService.getQuestions(1));
 
-        Assertions.assertThatExceptionOfType(IncorrectAmountOfQuestionsException.class)
+        assertThatExceptionOfType(IncorrectAmountOfQuestionsException.class)
                 .isThrownBy(() -> examinerService.getQuestions(-1));
+
+
 
     }
 
@@ -62,8 +64,8 @@ public class ExaminerServiceTest {
         when(javaQuestionService.getRandomQuestion()).thenReturn(question5, question4, question1);
         assertThat(examinerService.getQuestions(3)).containsExactlyInAnyOrder(question5, question4, question1);
 
-        when(javaQuestionService.getRandomQuestion()).thenReturn(question5, question4, question1, question5, question2, question3);
-        assertThat(examinerService.getQuestions(5)).containsExactlyInAnyOrder(question5, question4, question1, question5, question2, question3);
+        when(javaQuestionService.getRandomQuestion()).thenReturn(question5, question4, question1, question5, question2, question4, question3);
+        assertThat(examinerService.getQuestions(5)).containsExactlyInAnyOrder(question5, question4, question1, question2, question3);
     }
 
 
